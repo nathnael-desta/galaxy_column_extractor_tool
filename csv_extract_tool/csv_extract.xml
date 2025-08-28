@@ -1,0 +1,43 @@
+<tool id="csv_extract" name="Extract Columns" version="@TOOL_VERSION@+galaxy@VERSION_SUFFIX@" profile="20.01">
+    <description>extracts selected columns from a CSV file</description>
+    <macros>
+        <token name="@TOOL_VERSION@">1.0</token>
+        <token name="@VERSION_SUFFIX@">0</token>
+    </macros>
+    <requirements>
+        <requirement type="package" version="1.0">csv_extract</requirement>
+    </requirements>
+    <command detect_errors="exit_code"><![CDATA[
+            csv_extract
+                --input '$input_csv'
+                --columns '$columns'
+                --output '$output_csv'
+        ]]></command>
+    <inputs>
+        <param name="input_csv" type="data" format="csv" label="CSV file to process"/>
+        <param name="columns" type="text" value="1" label="Columns to extract" help="Enter column numbers, separated by commas (e.g., 1,3,5)"/>
+    </inputs>
+    <outputs>
+        <data name="output_csv" format="csv" label="Extracted columns from ${on_string}"/>
+    </outputs>
+    <tests>
+        <test expect_num_outputs="1">
+            <param name="input_csv" value="test_in.csv"/>
+            <param name="columns" value="1,3"/>
+            <output name="output_csv" file="test_out.csv"/>
+        </test>
+    </tests>
+    <help><![CDATA[
+            This tool extracts specific columns from a CSV file based on their number.
+        ]]></help>
+    <citations>
+        <citation type="bibtex">
+            @misc{galaxyproject,
+                author = {The Galaxy Community},
+                title = {The Galaxy Platform},
+                year = {2025},
+                url = {https://galaxyproject.org}
+            }
+            </citation>
+    </citations>
+</tool>
